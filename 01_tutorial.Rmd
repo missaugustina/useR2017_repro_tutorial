@@ -1,0 +1,25 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r package, message=FALSE, cache=FALSE}
+library("tidyverse")
+library("testthat")
+library("ggplot2")
+```
+
+```{r}
+gap_5060 <- read_csv("data/gapminder-5060.csv")
+```
+
+#### 2. Visualize life expectancy over time for Canada in the 1950s and 1960s using a line plot.
+  
+```{r}
+# Filter the data for Canada only
+gap_5060_CA <- gap_5060 %>%
+  filter(country == "Canada")
+# Visualize
+ggplot(data = gap_5060_CA, aes(x = year, y = lifeExp)) +
+  geom_line()
+```
