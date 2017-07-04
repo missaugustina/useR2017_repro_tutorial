@@ -3,6 +3,8 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+# Exercise 1:
+
 ```{r package, message=FALSE, cache=FALSE}
 library("tidyverse")
 library("testthat")
@@ -23,3 +25,30 @@ gap_5060_CA <- gap_5060 %>%
 ggplot(data = gap_5060_CA, aes(x = year, y = lifeExp)) +
   geom_line()
 ```
+
+# Exercise 3: Organization
+
+Devise a naming scheme for files:
+ 1. Assays performed on different days
+ 2. BRAF mRNA
+ 3. Different plasmids were used to transform e. coli (Plasmid CL56)
+ 4. Readings from plate containing multiple wells:
+   * rows (eg A, B. C)
+   * Cols (eg 1 ,2, 3)
+   * 1 CSV per well
+
+BRAF_$isodatetime_$row_$col_$plasmid.csv
+
+```{r}
+
+filename <- function (experiment, experiment_type, iso_date, culture, sample, plasmid) {
+  paste(paste(experiment, experiment_type, iso_date, row, col, plasmid, sep="_"), ".csv", sep="")
+}
+
+filename('mRNA', 'BRAFAssay', 20170101, "A", "1", "CL56")
+
+```
+
+
+
+
